@@ -66,3 +66,30 @@ Promise.race([
 setInterval() se ejecuta cada cierto tiempo.
 setTimeout() se ejecuta una sola vez luego de un periodo de tiempo.
 * Los tiempos se asignan en ms
+
+### Ajax
+- jQuery
+```js
+$.ajax("url", {
+  method: "GET", //POST, PUT, DELETE
+  success: function(data) {
+    //se ejecuta cuando todo sale bien
+    //data: lo que devuelve el api
+  },
+  error: function(error) {
+    //se ejecuta cuando hay un error
+    //error: mensaje de error del api
+  }
+})
+```
+-JavaScript
+```js
+fetch("url")
+  .then(function(response) {
+
+  })
+  .catch(function(response) {
+
+  })
+```
+Fetch devuelve una promesa. Esta promesa, a su vez, tiene un método llamado json() que regresa otra promesa con los datos en formato JSON.
