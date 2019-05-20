@@ -93,3 +93,22 @@ fetch("url")
   })
 ```
 Fetch devuelve una promesa. Esta promesa, a su vez, tiene un método llamado json() que regresa otra promesa con los datos en formato JSON.
+
+### Asincronismo
+Peticiones a: https://yts.am/api
+Con async/await se maneja 'sincronamente' el asincronismo.
+Y se convierte en otra manera de manejar promesas.
+```js
+(async function load() {
+    //await()
+    async function getData(url){
+        const response = await fetch(url)
+        const data = await response.json()
+        return data
+    }
+    const actionList = await getData('https://yts.am/api/v2/list_movies.json?genre=action')
+})()
+```
+En la anterior declaración se observa que solo una función con async será llamada con await, determinando que espera la respuesta de una promesa.
+* Las promesas se pueden resolver con async/await o con .then y .catch. La elección de cual usar es decisón del programador.
+Se observa que async/await es más legible y corta.

@@ -93,6 +93,42 @@ fetch('https://randomuser.me/api/')
         console.log('FAlló algo')
     })
 
+/**
+ * ASINCRONISMO:
+ * USar la palabra async para determinar que la funcion es asincrona.
+ * Y con await, se usa para definir que una funcion que devuelve una promesa,
+ * Estará esperando que termine la función. y luego se ejecutará lo que se ponga
+*/
+async function load() {
+    //await()
+}
 
-
-
+/**
+ * SI se quiere llamar una funciión de una, sería así
+ * Se pone entre parentesis y se pone luego doble parentesis.
+ * Hasta que ambas promesas no acaben, no se ejecuta el console.log
+ * Se puede usar promesas o async await
+*/
+(async function load() {
+    //await()
+    //action
+    //drama
+    //animation
+    async function getData(url){
+        const response = await fetch(url)
+        const data = await response.json()
+        return data
+    }
+    const actionList = await getData('https://yts.am/api/v2/list_movies.json?genre=action')
+    const dramaList = await getData('https://yts.am/api/v2/list_movies.json?genre=drama')
+    const animationList = await getData('https://yts.am/api/v2/list_movies.json?genre=animation')
+    let dramaList2; 
+    getData('https://yts.am/api/v2/list_movies.json?genre=drama')
+        .then(function(data){
+            console.log('dramaList2:',data)
+            dramaList2 = data
+        })
+    console.log('actionList::',actionList)
+    console.log('dramaList::',dramaList)
+    console.log('animationList::',animationList)
+})()
