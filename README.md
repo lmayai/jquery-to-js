@@ -196,5 +196,25 @@ $container.children[0].remove();
 ```
 Donde en el selector container, el primer hijo será borrado
 
-### Reutilizar funciones
-
+### Eventos
+Mirar la doc en MDN para tomar los eventos del navegador o el DOM.
+-  Con JS para escuchar un evento sobre algun elemento
+```js
+$element.addEventListener('click',()=>{
+   alert('click')
+})
+```
+- Con JQuery
+```JS
+$('.element').on('click',()=>{
+  alert('click')
+})
+```
+- Con el evento de submit hay una pequeña recarga de la página. Ésta puede quitarse del siguiente modo
+```js
+const $form = document.getElementById('form')
+$form.addEventListener('submit',(event)=>{
+    event.preventDefault()
+})
+```
+El formulario envía los datos del input de estos. Por defecto hace la recarga para que sean llevados a un backend
