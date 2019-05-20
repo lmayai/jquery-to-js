@@ -112,3 +112,45 @@ Y se convierte en otra manera de manejar promesas.
 En la anterior declaración se observa que solo una función con async será llamada con await, determinando que espera la respuesta de una promesa.
 * Las promesas se pueden resolver con async/await o con .then y .catch. La elección de cual usar es decisón del programador.
 Se observa que async/await es más legible y corta.
+* Las dos formas de hacerlo serían:
+- Con async/await
+```js
+// Con async/await
+const actionList = await getData('https://yts.am/api/v2/list_movies.json?genre=action')
+console.log(actionList)
+```
+- Con then() y catch()
+```js
+// Con then() y catch()
+getData('https://yts.am/api/v2/list_movies.json?genre=action')
+  .then(function(data){
+    console.log('actionList',data)
+  })
+  .catch()
+```
+
+### Selectores
+Los selectores sirven para obetener un elemento de dom y agregarle atributos, clases, etc.
+EJM: Tomar un selector de las peliculas y agregarle una lista
+```js
+// Un selector en JQuery sería: . para clase y # para id
+const $home = $('.home .list #item')
+```
+De los anterior, por convension $ se recomienda usar para elementos del DOM, y va a encontrar un elemento con clase home, adentro con clase list y adentro con el id item.
+```js
+// Con vanilla JS
+const $modal = document.getElementById('modal') //elemento único
+const $modals = document.getElementsByClassName('modal')
+// El primer elemento está en
+const $modal1 = $modals[0]
+const $divs = document.getElementsByTagName('div') //Buscando por el tag
+```
+El query selector busca el primero que coincida con un selector o todos
+```js 
+const $primerModal = document.querySelector('.modal')
+const $todosModal = document.querySelectorAll('.modal')
+```
+Es posible buscar no solo sobre el DOM completo, sino sobre selectores ya seleccionados
+```js 
+  $modal.querySelector('#modal img')
+```

@@ -131,4 +131,22 @@ async function load() {
     console.log('actionList::',actionList)
     console.log('dramaList::',dramaList)
     console.log('animationList::',animationList)
+
+
+    const $actionContainer = document.querySelector('#action')
+    const $dramaContainer = document.getElementById('drama')
+    const $animationContainer = document.querySelector('#animation')
+
+    const $featuringContainer = document.getElementById('featuring')
+    const $form = document.getElementById('form')
+    const $home = document.getElementById('home')
+
+    const $modal = document.getElementById('modal')
+    const $overlay = document.getElementById('overlay')
+    const $hideModal = document.getElementById('hide-modal')
+
+    const $modalImage = $modal.querySelector('#modal img')
+    const $modalTitle = $modal.querySelector('#modal h1')
+    const $modalDescription = $modal.querySelector('#modal p')
+
 })()
