@@ -168,7 +168,9 @@ async function load() {
     */
     actionList.data.movies.forEach( (movie) => {
         const HTMLString = videoItemTemplate(movie)
-        console.log(HTMLString)
+        const $html = document.implementation.createHTMLDocument();
+        $html.body.innerHTML = HTMLString
+        $actionContainer.append($html.body.children[0])
     })
 
 })()

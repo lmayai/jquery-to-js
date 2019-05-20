@@ -179,3 +179,14 @@ Si mi HTML tiene
     </h4>
 </div>`
 ``` 
+
+### CReación de DOM
+Para crear un elemento del DOM se usa:
+```js 
+// Paso 1:Crea un elemento HTML
+const $html = document.implementation.createHTMLDocument();
+// Paso2: Se asigna un elemento al html con innerHTML
+$html.body.innerHTML = '<p>Párrafo<\p>'
+// Paso3: Luego se le adiciona el ejemnto html a un selector
+$actionContainer.append($html.body.children[0])
+``` 
