@@ -132,6 +132,20 @@ async function load() {
     console.log('dramaList::',dramaList)
     console.log('animationList::',animationList)
 
+//    function videoItemTemplate(src,title) {
+    function videoItemTemplate(movie) {
+        return (
+            `<div class="primaryPalyListItem">
+                <div class="primaryPalyListItem-image">
+                    <img src="${movie.medium_cover_image}">
+                </div>
+                <h4 class="primaryPalyListItem-title">
+                    ${movie.title}
+                </h4>
+            </div>`
+        )
+    }
+    //console.log(videoItemTemplate('src/images/covers/bitcoin.jpg','Bitcoin'))
 
     const $actionContainer = document.querySelector('#action')
     const $dramaContainer = document.getElementById('drama')
@@ -148,5 +162,13 @@ async function load() {
     const $modalImage = $modal.querySelector('#modal img')
     const $modalTitle = $modal.querySelector('#modal h1')
     const $modalDescription = $modal.querySelector('#modal p')
+
+    /** 
+     * Ahora vamos a iterar sobre cada lista
+    */
+    actionList.data.movies.forEach( (movie) => {
+        const HTMLString = videoItemTemplate(movie)
+        console.log(HTMLString)
+    })
 
 })()

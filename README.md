@@ -154,3 +154,28 @@ Es posible buscar no solo sobre el DOM completo, sino sobre selectores ya selecc
 ```js 
   $modal.querySelector('#modal img')
 ```
+
+### Templates
+Las plantillas definen el componente de un contenedor desd JS
+Si mi HTML tiene 
+
+```html
+<div class="primaryPalyListItem">
+    <div class="primaryPalyListItem-image">
+      <img src="">
+    </div>
+    <h4 class="primaryPalyListItem-title">
+      Titulo
+    </h4>
+</div>
+``` 
+```js 
+`<div class="primaryPalyListItem">
+    <div class="primaryPalyListItem-image">
+      <img src="${src}">
+    </div>
+    <h4 class="primaryPalyListItem-title">
+      ${title}
+    </h4>
+</div>`
+``` 
