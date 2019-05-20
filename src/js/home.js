@@ -147,6 +147,22 @@ async function load() {
     }
     //console.log(videoItemTemplate('src/images/covers/bitcoin.jpg','Bitcoin'))
 
+    function createTemplate(HTMLString){
+        const $html = document.implementation.createHTMLDocument();
+        $html.body.innerHTML = HTMLString
+        return $html.body.children[0]
+    }
+
+    function renderMovieList(list,$container){ 
+        $container.children[0].remove();
+        //actionList.data.movies.forEach( (movie) => {
+        list.forEach( (movie) => {
+            const HTMLString = videoItemTemplate(movie)
+            const movieElement = createTemplate(HTMLString)
+            $container.append(movieElement)
+        })
+    }
+
     const $actionContainer = document.querySelector('#action')
     const $dramaContainer = document.getElementById('drama')
     const $animationContainer = document.querySelector('#animation')
@@ -163,14 +179,8 @@ async function load() {
     const $modalTitle = $modal.querySelector('#modal h1')
     const $modalDescription = $modal.querySelector('#modal p')
 
-    /** 
-     * Ahora vamos a iterar sobre cada lista
-    */
-    actionList.data.movies.forEach( (movie) => {
-        const HTMLString = videoItemTemplate(movie)
-        const $html = document.implementation.createHTMLDocument();
-        $html.body.innerHTML = HTMLString
-        $actionContainer.append($html.body.children[0])
-    })
+    renderMovieList(actionList.data.movies,$actionContainer)
+    renderMovieList(dramaList.data.movies,$dramaContainer)
+    renderMovieList(animationList.data.movies,$animationContainer)
 
 })()

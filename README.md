@@ -190,3 +190,11 @@ $html.body.innerHTML = '<p>Párrafo<\p>'
 // Paso3: Luego se le adiciona el ejemnto html a un selector
 $actionContainer.append($html.body.children[0])
 ``` 
+Para borrar un elemento de mi HTML, se usa remove()
+```js
+$container.children[0].remove();
+```
+Donde en el selector container, el primer hijo será borrado
+
+### Reutilizar funciones
+
