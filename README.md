@@ -231,3 +231,32 @@ Tambien es posible agregar cualquier estilo a un elemento con la propiedad style
 ```js
 $0.style.animation = 'modalIn .8s forwards'
 ```
+
+### Creación de elementos y asignación de atributos
+PRimero se crea un elemento, el cual será el $loader
+```js
+const $loader = document.createElement("img");
+```
+Con Jquery se asignan atributos así:
+```js
+$("#element").attr({
+  src: "",
+  height: ""
+})
+```
+Con JS se asignan así:
+```js
+$element.setAttribute("src", "img/foto.png");
+```
+Para obtener atributos del DOM sería así:
+```js
+const src = $element.setAttribute("src")
+```
+Para asginar múltiples atrbutos sería así:
+```js
+function setAttributes($element, attributes) {
+  for(const attribute in attributes) {
+    $element.setAttribute(attribute, attributes[attribute]);
+  }
+}
+```

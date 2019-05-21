@@ -122,9 +122,26 @@ async function load() {
 
     const $home = document.getElementById('home')
     const $form = document.getElementById('form')
+    const $featuringContainer = document.getElementById('featuring')
+
+    function setAttributes($element,attributes){
+        for (const key in attributes){
+            $element.setAttribute(key,attributes[key])
+        }
+    }
+    
     $form.addEventListener('submit',(event)=>{
         event.preventDefault() //prevenir recarga de la página
         $home.classList.add('search-active')
+        const $loader = document.createElement('img') //<img>
+        // Ahora se agregan los atributos
+        setAttributes($loader,{
+            src:'src/images/loader.gif',
+            height:50,
+            width:50
+        })
+        $featuringContainer.append($loader)
+        //$loader.setAttribute('src','valor') //<img src='valor'>
     })
 
 
@@ -182,8 +199,6 @@ async function load() {
     const $actionContainer = document.querySelector('#action')
     const $dramaContainer = document.getElementById('drama')
     const $animationContainer = document.querySelector('#animation')
-
-    const $featuringContainer = document.getElementById('featuring')
 
     const $modal = document.getElementById('modal')
     const $overlay = document.getElementById('overlay')
