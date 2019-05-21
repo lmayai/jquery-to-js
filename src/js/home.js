@@ -120,9 +120,11 @@ async function load() {
         return data
     }
 
+    const $home = document.getElementById('home')
     const $form = document.getElementById('form')
     $form.addEventListener('submit',(event)=>{
         event.preventDefault() //prevenir recarga de la página
+        $home.classList.add('search-active')
     })
 
 
@@ -161,8 +163,8 @@ async function load() {
     }
 
     function addEventClick($element){
-        $element.addEventListener('click',()=>{
-            alert('click')
+        $element.addEventListener('click',()=>{ 
+            showModal()
         })
     }
 
@@ -182,8 +184,6 @@ async function load() {
     const $animationContainer = document.querySelector('#animation')
 
     const $featuringContainer = document.getElementById('featuring')
-    
-    const $home = document.getElementById('home')
 
     const $modal = document.getElementById('modal')
     const $overlay = document.getElementById('overlay')
@@ -192,6 +192,18 @@ async function load() {
     const $modalImage = $modal.querySelector('#modal img')
     const $modalTitle = $modal.querySelector('#modal h1')
     const $modalDescription = $modal.querySelector('#modal p')
+
+    function showModal(){ 
+        $overlay.classList.add('active')
+        $modal.style.animation = 'modalIn .8s forwards'
+    }
+
+    $hideModal.addEventListener('click', hideModal)
+
+    function hideModal(){
+        $overlay.classList.remove('active')
+        $modal.style.animation = 'modalOut .8s forwards'
+    }
 
     renderMovieList(actionList.data.movies,$actionContainer)
     renderMovieList(dramaList.data.movies,$dramaContainer)

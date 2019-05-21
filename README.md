@@ -218,3 +218,16 @@ $form.addEventListener('submit',(event)=>{
 })
 ```
 El formulario envía los datos del input de estos. Por defecto hace la recarga para que sean llevados a un backend
+
+### CLases y estilos
+Cambiar agregar y modificar las etiquetas desde JS al CSS.
+- PAra tomar un selector desde el inspector se hace con **$0**
+```js
+$0.classlist.add('clase') //Agrega una clase
+$0.classlist.remove('clase') //Quita una clase
+$0.classlist.togle('clase') //La quita o pone 
+```
+Tambien es posible agregar cualquier estilo a un elemento con la propiedad style.
+```js
+$0.style.animation = 'modalIn .8s forwards'
+```
