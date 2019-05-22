@@ -188,9 +188,9 @@ async function load() {
     console.log('animationList::',animationList)
 
 //    function videoItemTemplate(src,title) {
-    function videoItemTemplate(movie) {
+    function videoItemTemplate(movie,category) {
         return (
-            `<div class="primaryPalyListItem">
+            `<div class="primaryPalyListItem" data-id="${movie.id}" data-category=${category}>
                 <div class="primaryPalyListItem-image">
                     <img src="${movie.medium_cover_image}">
                 </div>
@@ -210,25 +210,28 @@ async function load() {
 
     function addEventClick($element){
         $element.addEventListener('click',()=>{ 
-            showModal()
+            showModal($element)
         })
     }
 
-    function renderMovieList(list,$container){ 
+    function renderMovieList(list,$container,category){ 
         $container.children[0].remove();
         //actionList.data.movies.forEach( (movie) => {
         list.forEach( (movie) => {
-            const HTMLString = videoItemTemplate(movie)
+            const HTMLString = videoItemTemplate(movie,category)
             const movieElement = createTemplate(HTMLString)
             $container.append(movieElement)
             addEventClick(movieElement)
         })
     }
-
+    
     const $actionContainer = document.querySelector('#action')
     const $dramaContainer = document.getElementById('drama')
     const $animationContainer = document.querySelector('#animation')
-
+    renderMovieList(actionList.data.movies,$actionContainer,'action')
+    renderMovieList(dramaList.data.movies,$dramaContainer,'drama')
+    renderMovieList(animationList.data.movies,$animationContainer,'animation')
+    
     const $modal = document.getElementById('modal')
     const $overlay = document.getElementById('overlay')
     const $hideModal = document.getElementById('hide-modal')
@@ -237,9 +240,11 @@ async function load() {
     const $modalTitle = $modal.querySelector('#modal h1')
     const $modalDescription = $modal.querySelector('#modal p')
 
-    function showModal(){ 
+    function showModal($element){ 
         $overlay.classList.add('active')
         $modal.style.animation = 'modalIn .8s forwards'
+        const id = $element.dataset.id
+        const category = $element.dataset.category
     }
 
     $hideModal.addEventListener('click', hideModal)
@@ -249,8 +254,5 @@ async function load() {
         $modal.style.animation = 'modalOut .8s forwards'
     }
 
-    renderMovieList(actionList.data.movies,$actionContainer)
-    renderMovieList(dramaList.data.movies,$dramaContainer)
-    renderMovieList(animationList.data.movies,$animationContainer)
 
 })()

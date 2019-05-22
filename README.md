@@ -292,3 +292,28 @@ Se ve que a movies se le asigna el nombre de pelis. Ahora pelis es el que se pas
 const HTMLStringFeat = createFeaturingTemplate(pelis[0])
 ```
 Esto mejora tiempos de búsqueda y cargas
+
+### Dataset
+Permite acceder a un objeto con todos los atributos *data* de un elemento DOM. Donde en el template se le asigna un data-id, data-catergory, etc.
+```js
+return (`<div class="primaryPalyListItem" data-id="${movie.id}" data-category=${category}>
+</div>`)
+```
+Para acceder a este atributo sería así 
+```js
+// $0 se refiere al elemento
+$0.getAttribute('data-id')
+$0.getAttribute('data-category')
+```
+Otra forma sería con dataSet
+```js
+$0.dataset // {id:28833, category:'action'}
+$0.dataset.id
+$0.dataset.category
+```
+- **Transformar tipos de datos**
+Cambiar un string a un entero
+```js
+parseInt($0.dataset.id)
+parseInt($0.dataset.id,10) //En sabe 10
+```
