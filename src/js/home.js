@@ -161,9 +161,14 @@ async function load() {
 
         // Uso de formData
         const data = new FormData($form)    
-        const peli = await getData(`${BASE_API}list_movies.json?limit=1&query_term=${data.get('name')}`)
-        debugger
-        const HTMLStringFeat = createFeaturingTemplate(peli.data.movies[0])
+        //const peli = await getData(`${BASE_API}list_movies.json?limit=1&query_term=${data.get('name')}`)
+        //const HTMLStringFeat = createFeaturingTemplate(peli.data.movies[0])
+        const {
+            data: {
+                movies: pelis
+            }
+        } = await getData(`${BASE_API}list_movies.json?limit=1&query_term=${data.get('name')}`)
+        const HTMLStringFeat = createFeaturingTemplate(pelis[0])
         $featuringContainer.innerHTML = HTMLStringFeat
 
     })

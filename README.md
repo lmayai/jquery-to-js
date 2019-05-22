@@ -269,3 +269,26 @@ FormData() es una interfaz que te permite obtener valores de un formulario y dat
   const data = new FormData($form)
   data.get('name') //obtiene el valor del formulario con el valor en 'name'
 ```
+
+### Destructuración de objetos (asignacioón por destructuración)
+*Destructuring assigment* permite entrar a un objeto o lista y poder sacar un dato para asignarlo a otra variable.
+Si inicialmente se tiene lo siguiente:
+```js
+const peli = await getData(`${BASE_API}list_movies.json?limit=1&query_term=${data.get('name')}`)
+const HTMLStringFeat = createFeaturingTemplate(peli.data.movies[0])
+```
+Al obtener peli que es una lista, se tiene que pasar data.movies[0], osea, entrar dentro de la lista obtenida.
+Es posible realizar la busqueda indicando que se quiere previamente, para buscar algo específico.
+Se debe destructurar así.
+```js
+const {
+    data: {
+        movies: pelis
+    }
+} = await getData(`${BASE_API}list_movies.json?limit=1&query_term=${data.get('name')}`)
+```
+Se ve que a movies se le asigna el nombre de pelis. Ahora pelis es el que se pasa.
+```js
+const HTMLStringFeat = createFeaturingTemplate(pelis[0])
+```
+Esto mejora tiempos de búsqueda y cargas
