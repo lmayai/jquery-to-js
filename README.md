@@ -218,3 +218,10 @@ $form.addEventListener('submit',(event)=>{
 })
 ```
 El formulario envía los datos del input de estos. Por defecto hace la recarga para que sean llevados a un backend
+
+### Formularios
+FormData() es una interfaz que te permite obtener valores de un formulario y datos dentro de este.
+```js```
+```js
+
+```
