@@ -219,9 +219,53 @@ $form.addEventListener('submit',(event)=>{
 ```
 El formulario envía los datos del input de estos. Por defecto hace la recarga para que sean llevados a un backend
 
+### CLases y estilos
+Cambiar agregar y modificar las etiquetas desde JS al CSS.
+- PAra tomar un selector desde el inspector se hace con **$0**
+```js
+$0.classlist.add('clase') //Agrega una clase
+$0.classlist.remove('clase') //Quita una clase
+$0.classlist.togle('clase') //La quita o pone 
+```
+Tambien es posible agregar cualquier estilo a un elemento con la propiedad style.
+```js
+$0.style.animation = 'modalIn .8s forwards'
+```
+
+### Creación de elementos y asignación de atributos
+PRimero se crea un elemento, el cual será el $loader
+```js
+const $loader = document.createElement("img");
+```
+Con Jquery se asignan atributos así:
+```js
+$("#element").attr({
+  src: "",
+  height: ""
+})
+```
+Con JS se asignan así:
+```js
+$element.setAttribute("src", "img/foto.png");
+```
+Para obtener atributos del DOM sería así:
+```js
+const src = $element.setAttribute("src")
+```
+Para asginar múltiples atrbutos sería así:
+```js
+function setAttributes($element, attributes) {
+  for(const attribute in attributes) {
+    $element.setAttribute(attribute, attributes[attribute]);
+  }
+}
+```
+
 ### Formularios
 FormData() es una interfaz que te permite obtener valores de un formulario y datos dentro de este.
 ```js```
 ```js
-
+  //Donde $form es el selector al formulario
+  const data = new FormData($form)
+  data.get('name') //obtiene el valor del formulario con el valor en 'name'
 ```
