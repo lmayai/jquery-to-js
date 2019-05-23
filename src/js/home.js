@@ -307,6 +307,7 @@ async function load() {
     
 /**
  * RETO 1: crear playlist de titulos de películas
+ * https://yts.am/api/v2/list_movies.json?limit=9
  */
     async function getMovieList(url){
         fetch
@@ -346,6 +347,66 @@ async function load() {
     }
 ///////////// FIN RETO 1
 
+/**
+ * RETO 2: Lista de amigos
+ * https://randomuser.me/api
+*/
+    const $myPlaylistFriends = document.querySelector('.playlistFriends')
+    const NUMBER_FRIENDS = 5
 
+    async function getFriend(){
+        const queryGetFriend = await fetch('https://randomuser.me/api')
+        const { 
+            results: {
+                0: {
+                    name :friendName // {title - first -last,}
+                }
+            }
+            , 
+            results:{
+                0:{
+                    picture: {
+                        thumbnail: friendImage
+                    }
+                }
+            } 
+        }
+        = await queryGetFriend.json()
+        debugger
+        if (friendName===undefined || friendImage===undefined){
+            throw new Error('No se puede desplegar la lista de amigos')
+        }
+        return {friendName,friendImage}
+    }
+
+    function createFriendTemplate(friend){
+        return (
+            `<li class="playlistFriends-item">
+                <a href="#">
+                    <img src="${friend.friendImage}" alt="Image" />
+                    <span style="text-transform: capitalize">
+                        ${friend.friendName.first} ${friend.friendName.last}
+                    </span>
+                </a>
+            </li>`
+        )
+    }
+
+    function renderFriend(friendObject,element){
+        const templateFriend = createFriendTemplate(friendObject);
+        const HTMLString = createTemplate(templateFriend);
+        element.append(HTMLString);
+    }
+
+    try{
+        for (let i =0;i<NUMBER_FRIENDS;i++){
+            const friendObject = await getFriend()
+            renderFriend(friendObject,$myPlaylistFriends)
+        }
+    }catch(error){
+        alert(error.message)
+    }
+
+//FIN RETO 2
 
 })() //END load()
