@@ -363,9 +363,25 @@ functionfind(list, id) {
 }
 ```
 
+## Animaciones
+Se puede agregar una animación a un elemento agregándole la clase de la animación respectiva.
+```js
+function renderMovieList(list, $container, category) {
+  $container.children[0].remove();
+  list.forEach((movie) => {
+    const HTMLString = videoItemTemplate(movie, category);
+    const movieElement = createTemplate(HTMLString);
+    $container.append(movieElement);
+    const image = movieElement.querySelector("img");
 
+    image.addEventListener("load", (event) => {
+      event.srcElement.classList.add("fadeIn");
+    })
 
-
+    addEventClick(movieElement);
+  });
+}
+```
 
 
 

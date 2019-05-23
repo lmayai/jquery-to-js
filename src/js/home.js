@@ -173,22 +173,6 @@ async function load() {
 
     })
 
-    //const actionList = await getData('https://yts.am/api/v2/list_movies.json?genre=action')
-    const {data: {movies: actionList}} = await getData('https://yts.am/api/v2/list_movies.json?genre=action')
-    //const dramaList = await getData('https://yts.am/api/v2/list_movies.json?genre=drama')
-    const {data: {movies :dramaList}} = await getData('https://yts.am/api/v2/list_movies.json?genre=drama')
-    //const animationList = await getData('https://yts.am/api/v2/list_movies.json?genre=animation')
-    const {data:{movies:animationList}} = await getData('https://yts.am/api/v2/list_movies.json?genre=animation')
-    let dramaList2; 
-    getData('https://yts.am/api/v2/list_movies.json?genre=drama')
-        .then(function(data){
-            console.log('dramaList2:',data)
-            dramaList2 = data
-        })
-    console.log('actionList::',actionList)
-    console.log('dramaList::',dramaList)
-    console.log('animationList::',animationList)
-
 //    function videoItemTemplate(src,title) {
     function videoItemTemplate(movie,category) {
         return (
@@ -223,20 +207,44 @@ async function load() {
             const HTMLString = videoItemTemplate(movie,category)
             const movieElement = createTemplate(HTMLString)
             $container.append(movieElement)
+            const image = movieElement.querySelector('img')
+            //Cuando se cargue la imagen ahise anima
+            image.addEventListener('load', (event) => {
+                event.srcElement.classList.add('fadeIn')
+            })
             addEventClick(movieElement)
         })
     }
-    
-    const $actionContainer = document.querySelector('#action')
-    const $dramaContainer = document.getElementById('drama')
-    const $animationContainer = document.querySelector('#animation')
+
+    //const actionList = await getData('https://yts.am/api/v2/list_movies.json?genre=action')
     //renderMovieList(actionList.data.movies,$actionContainer,'action')
-    //renderMovieList(dramaList.data.movies,$dramaContainer,'drama')
-    //renderMovieList(animationList.data.movies,$animationContainer,'animation')
+    const {data: {movies: actionList}} = await getData('https://yts.am/api/v2/list_movies.json?genre=action')
+    const $actionContainer = document.querySelector('#action')
     renderMovieList(actionList,$actionContainer,'action')
-    renderMovieList(dramaList,$dramaContainer,'drama')
-    renderMovieList(animationList,$animationContainer,'animation')
     
+    //const dramaList = await getData('https://yts.am/api/v2/list_movies.json?genre=drama')
+    //renderMovieList(dramaList.data.movies,$dramaContainer,'drama')
+    const {data: {movies :dramaList}} = await getData('https://yts.am/api/v2/list_movies.json?genre=drama')
+    const $dramaContainer = document.getElementById('drama')
+    renderMovieList(dramaList,$dramaContainer,'drama')
+    
+    //const animationList = await getData('https://yts.am/api/v2/list_movies.json?genre=animation')
+    //renderMovieList(animationList.data.movies,$animationContainer,'animation')
+    const {data:{movies:animationList}} = await getData('https://yts.am/api/v2/list_movies.json?genre=animation')
+    const $animationContainer = document.querySelector('#animation')
+    renderMovieList(animationList,$animationContainer,'animation')  
+
+    let dramaList2; 
+    getData('https://yts.am/api/v2/list_movies.json?genre=drama')
+        .then(function(data){
+            console.log('dramaList2:',data)
+            dramaList2 = data
+        })
+    console.log('actionList::',actionList)
+    console.log('dramaList::',dramaList)
+    console.log('animationList::',animationList)    
+
+
     const $modal = document.getElementById('modal')
     const $overlay = document.getElementById('overlay')
     const $hideModal = document.getElementById('hide-modal')
