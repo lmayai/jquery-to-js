@@ -304,5 +304,48 @@ async function load() {
         $modal.style.animation = 'modalOut .8s forwards'
     }
 
+    
+/**
+ * RETO 1: crear playlist de titulos de películas
+ */
+    async function getMovieList(url){
+        fetch
+    }
 
-})()
+    const $myPlayList = document.querySelector('.myPlaylist')
+
+    function templatePlaylistMovies(movie){
+        return (
+        `<li class="myPlaylist-item">
+            <a href="#">
+            <span>
+                ${movie.title}
+            </span>
+            </a>
+        </li>`
+        )
+    }
+
+    function renderPlaylistMovies(list,$element){
+        list.forEach( movie => {
+            const templateMovies = templatePlaylistMovies(movie)
+            const HTMLString = createTemplate(templateMovies)
+            $element.append(HTMLString)
+        })
+    }
+
+    try {
+        const getListMovies = await fetch('https://yts.am/api/v2/list_movies.json?limit=9')
+        const {data:{movies:listMovies}} = await getListMovies.json()
+        if(listMovies.lenght<=0){
+            throw new Error('No hay lista de pelÍculas en tus sugeridos')
+        }
+        renderPlaylistMovies(listMovies,$myPlayList)
+    }catch(error){
+        alert(error.message)
+    }
+///////////// FIN RETO 1
+
+
+
+})() //END load()
