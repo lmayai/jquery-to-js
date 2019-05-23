@@ -117,7 +117,11 @@ async function load() {
     async function getData(url){
         const response = await fetch(url)
         const data = await response.json()
-        return data
+        //SI retorna peliculas
+        if (data.data.movie_count>0){
+            return data
+        }
+        throw new Error('No se encontraron pelis con ese nombre :(') 
     }
 
     const $home = document.getElementById('home')
@@ -163,13 +167,21 @@ async function load() {
         const data = new FormData($form)    
         //const peli = await getData(`${BASE_API}list_movies.json?limit=1&query_term=${data.get('name')}`)
         //const HTMLStringFeat = createFeaturingTemplate(peli.data.movies[0])
-        const {
-            data: {
-                movies: pelis
-            }
-        } = await getData(`${BASE_API}list_movies.json?limit=1&query_term=${data.get('name')}`)
-        const HTMLStringFeat = createFeaturingTemplate(pelis[0])
-        $featuringContainer.innerHTML = HTMLStringFeat
+        try {
+            const {
+                data: {
+                    movies: pelis
+                }
+            } = await getData(`${BASE_API}list_movies.json?limit=1&query_term=${data.get('name')}`)
+            const HTMLStringFeat = createFeaturingTemplate(pelis[0])
+            $featuringContainer.innerHTML = HTMLStringFeat
+        } catch (error) {
+            alert(error.message)
+            $loader.remove()
+            $home.classList.remove('search-active')
+            console.log("ERROR:",error)
+        }
+        
 
     })
 

@@ -382,9 +382,36 @@ function renderMovieList(list, $container, category) {
   });
 }
 ```
+## Manejo de errores
+En caso que no encuentre algo o el retorno se de mal o no haya internet.
+* Se usa try - catch
+```js
+try{
+  eval(alert('Hello'))
+}
+catch(error){
+  console.log(error)
+}
+```
+* Para eliminar un elemento previamente creado
+```js
+const loader = document.createElement('img')
+// .
+// .
+// .
+loader.remove() //Asi se elimina el elemento
+```
+#### API de error y throw
+El Error crea un error y Throw lo lanza de manera intencional y tener un mensaje personalizada.
+```js
+throw new Error('Este es un error creado')
+```
+Cuando lance este error, el método que hizo el llamado ahora pasará al catch.
 
-
-
+#### RETO
+1.Para las colomnas de la izquierda, imprimir ista de amigos con nombre aleatorios.
+https://randomuser.me/api para obtener amigos de una lista. Tambien tienen imagenes
+2. Poner movies en el lado de las playlists
 
 
 
