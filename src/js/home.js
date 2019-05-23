@@ -173,10 +173,12 @@ async function load() {
 
     })
 
-
-    const actionList = await getData('https://yts.am/api/v2/list_movies.json?genre=action')
-    const dramaList = await getData('https://yts.am/api/v2/list_movies.json?genre=drama')
-    const animationList = await getData('https://yts.am/api/v2/list_movies.json?genre=animation')
+    //const actionList = await getData('https://yts.am/api/v2/list_movies.json?genre=action')
+    const {data: {movies: actionList}} = await getData('https://yts.am/api/v2/list_movies.json?genre=action')
+    //const dramaList = await getData('https://yts.am/api/v2/list_movies.json?genre=drama')
+    const {data: {movies :dramaList}} = await getData('https://yts.am/api/v2/list_movies.json?genre=drama')
+    //const animationList = await getData('https://yts.am/api/v2/list_movies.json?genre=animation')
+    const {data:{movies:animationList}} = await getData('https://yts.am/api/v2/list_movies.json?genre=animation')
     let dramaList2; 
     getData('https://yts.am/api/v2/list_movies.json?genre=drama')
         .then(function(data){
@@ -228,9 +230,12 @@ async function load() {
     const $actionContainer = document.querySelector('#action')
     const $dramaContainer = document.getElementById('drama')
     const $animationContainer = document.querySelector('#animation')
-    renderMovieList(actionList.data.movies,$actionContainer,'action')
-    renderMovieList(dramaList.data.movies,$dramaContainer,'drama')
-    renderMovieList(animationList.data.movies,$animationContainer,'animation')
+    //renderMovieList(actionList.data.movies,$actionContainer,'action')
+    //renderMovieList(dramaList.data.movies,$dramaContainer,'drama')
+    //renderMovieList(animationList.data.movies,$animationContainer,'animation')
+    renderMovieList(actionList,$actionContainer,'action')
+    renderMovieList(dramaList,$dramaContainer,'drama')
+    renderMovieList(animationList,$animationContainer,'animation')
     
     const $modal = document.getElementById('modal')
     const $overlay = document.getElementById('overlay')
@@ -240,11 +245,36 @@ async function load() {
     const $modalTitle = $modal.querySelector('#modal h1')
     const $modalDescription = $modal.querySelector('#modal p')
 
+    function findById(list,id){
+        return list.find( movie => movie.id===id )
+    }
+
+    function findMovie(id,category) {
+        switch (category) {
+            case 'action' :{
+                return findById(actionList,id)
+            }
+            case 'drama' :{
+                return findById(dramaList,id)
+            }
+            case 'animation':{
+                return findById(animationList,id)
+            }
+            default :
+                break;
+        }
+    }
+
     function showModal($element){ 
         $overlay.classList.add('active')
         $modal.style.animation = 'modalIn .8s forwards'
         const id = $element.dataset.id
         const category = $element.dataset.category
+        const data = findMovie(parseInt(id,10),category)
+        console.log(data)
+        $modalTitle.textContent = data.title
+        $modalImage.setAttribute('src',data.medium_cover_image)
+        $modalDescription.textContent = data.description_full
     }
 
     $hideModal.addEventListener('click', hideModal)

@@ -1,20 +1,20 @@
 # jquery-to-js
 Project Platzi Video website created using Jquery and also a similiar with JS vanilla.
 
-### Objectives
+## Objectives
 Created site using vanilla Js and compare it with Jquery
 
-### Procesos asíncronos
+## Procesos asíncronos
 Un proceso asíncrono es un código que se está ejecutando, pero no ha terminado de ejecutarse antes de que se ejecute un código que está después de él.
 
 Esto permite que la aplicación no se cuelque mientras está ejecutando un proceso muy largo.
 
-### Variables
+## Variables
 var es la forma de crear variables hasta ES5.
 const es para declarar constantes.
 let es para crear variables que cambian.
 
-### Funciones
+## Funciones
 ```js
 functioncambiarNombre(nuevoNombre) {
   cambia = nuevoNombre;
@@ -26,7 +26,7 @@ cambiarNombre = (nuevoNombre) => {
 }
 ```
 
-### Promesas
+## Promesas
 Una promesa es un objeto que representa la terminación o el fracaso eventual de una operación asíncrona.
 ```js
 //Crear una promesa
@@ -62,12 +62,12 @@ Promise.race([
 .then(function() {})
 .catch(function() {})
 ```
-### Timers
+## Timers
 setInterval() se ejecuta cada cierto tiempo.
 setTimeout() se ejecuta una sola vez luego de un periodo de tiempo.
 * Los tiempos se asignan en ms
 
-### Ajax
+## Ajax
 - jQuery
 ```js
 $.ajax("url", {
@@ -94,7 +94,7 @@ fetch("url")
 ```
 Fetch devuelve una promesa. Esta promesa, a su vez, tiene un método llamado json() que regresa otra promesa con los datos en formato JSON.
 
-### Asincronismo
+## Asincronismo
 Peticiones a: https://yts.am/api
 Con async/await se maneja 'sincronamente' el asincronismo.
 Y se convierte en otra manera de manejar promesas.
@@ -129,7 +129,7 @@ getData('https://yts.am/api/v2/list_movies.json?genre=action')
   .catch()
 ```
 
-### Selectores
+## Selectores
 Los selectores sirven para obetener un elemento de dom y agregarle atributos, clases, etc.
 EJM: Tomar un selector de las peliculas y agregarle una lista
 ```js
@@ -155,7 +155,7 @@ Es posible buscar no solo sobre el DOM completo, sino sobre selectores ya selecc
   $modal.querySelector('#modal img')
 ```
 
-### Templates
+## Templates
 Las plantillas definen el componente de un contenedor desd JS
 Si mi HTML tiene 
 
@@ -180,7 +180,7 @@ Si mi HTML tiene
 </div>`
 ``` 
 
-### CReación de DOM
+## Creación de DOM
 Para crear un elemento del DOM se usa:
 ```js 
 // Paso 1:Crea un elemento HTML
@@ -196,7 +196,7 @@ $container.children[0].remove();
 ```
 Donde en el selector container, el primer hijo será borrado
 
-### Eventos
+## Eventos
 Mirar la doc en MDN para tomar los eventos del navegador o el DOM.
 -  Con JS para escuchar un evento sobre algun elemento
 ```js
@@ -219,7 +219,7 @@ $form.addEventListener('submit',(event)=>{
 ```
 El formulario envía los datos del input de estos. Por defecto hace la recarga para que sean llevados a un backend
 
-### CLases y estilos
+## CLases y estilos
 Cambiar agregar y modificar las etiquetas desde JS al CSS.
 - PAra tomar un selector desde el inspector se hace con **$0**
 ```js
@@ -232,7 +232,7 @@ Tambien es posible agregar cualquier estilo a un elemento con la propiedad style
 $0.style.animation = 'modalIn .8s forwards'
 ```
 
-### Creación de elementos y asignación de atributos
+## Creación de elementos y asignación de atributos
 PRimero se crea un elemento, el cual será el $loader
 ```js
 const $loader = document.createElement("img");
@@ -261,7 +261,7 @@ function setAttributes($element, attributes) {
 }
 ```
 
-### Formularios
+## Formularios
 FormData() es una interfaz que te permite obtener valores de un formulario y datos dentro de este.
 ```js```
 ```js
@@ -270,7 +270,7 @@ FormData() es una interfaz que te permite obtener valores de un formulario y dat
   data.get('name') //obtiene el valor del formulario con el valor en 'name'
 ```
 
-### Destructuración de objetos (asignacioón por destructuración)
+## Destructuración de objetos (asignacioón por destructuración)
 *Destructuring assigment* permite entrar a un objeto o lista y poder sacar un dato para asignarlo a otra variable.
 Si inicialmente se tiene lo siguiente:
 ```js
@@ -293,7 +293,7 @@ const HTMLStringFeat = createFeaturingTemplate(pelis[0])
 ```
 Esto mejora tiempos de búsqueda y cargas
 
-### Dataset
+## Dataset
 Permite acceder a un objeto con todos los atributos *data* de un elemento DOM. Donde en el template se le asigna un data-id, data-catergory, etc.
 ```js
 return (`<div class="primaryPalyListItem" data-id="${movie.id}" data-category=${category}>
@@ -312,8 +312,66 @@ $0.dataset.id
 $0.dataset.category
 ```
 - **Transformar tipos de datos**
+
 Cambiar un string a un entero
 ```js
 parseInt($0.dataset.id)
 parseInt($0.dataset.id,10) //En sabe 10
 ```
+
+## Encontrando elementos de una lista (find)
+find() devuelve el primer elemento de un array que cumpla con el criterio de búsqueda. Si no se encuentra ningún elemento devuelve undefined.
+```js
+functionfind(list, id) {
+  return list.find(movie => movie.id === id)
+}
+```
+Lo que retorna es un objeto donde se cumpla la condición, en este caso el objeto de la lista donde se cumple la posicion.Devuelve solo el primer elemento
+
+* Información referencial:
+https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/find
+
+* Switch
+Si se usa llave {} no es necesario usar un break
+```js
+switch (category) {
+  case"action": {
+    //código de action
+  }
+  case"drama": {
+    //código de drama
+  }
+  default: {
+    //código por defecto
+  }
+}
+```
+
+### Simplificar arrow function
+Esto:
+```js
+functionfind(list, id) {
+  return list.find( (movie) => {
+    return movie.id === id
+  })
+}
+```
+Por esto:
+```js
+functionfind(list, id) {
+  return list.find(movie => movie.id === id)
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
