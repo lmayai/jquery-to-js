@@ -228,24 +228,32 @@ async function load() {
         })
     }
 
+    async function cacheExist(category){
+        const listName = `${category}List`
+        const cacheList = window.localStorage.getItem(listName)
+        if (cacheList){
+            return JSON.parse(cacheList)
+        }
+        const {data: {movies: data}} = await getData(`https://yts.am/api/v2/list_movies.json?genre=${category}`)
+        window.localStorage.setItem(listName,JSON.stringify(data))
+        return data
+    }
+
     //const actionList = await getData('https://yts.am/api/v2/list_movies.json?genre=action')
     //renderMovieList(actionList.data.movies,$actionContainer,'action')
-    const {data: {movies: actionList}} = await getData('https://yts.am/api/v2/list_movies.json?genre=action')
-    window.localStorage.setItem('actionList',JSON.stringify(actionList))
+    const actionList = await cacheExist('action')
     const $actionContainer = document.querySelector('#action')
     renderMovieList(actionList,$actionContainer,'action')
     
     //const dramaList = await getData('https://yts.am/api/v2/list_movies.json?genre=drama')
     //renderMovieList(dramaList.data.movies,$dramaContainer,'drama')
-    const {data: {movies :dramaList}} = await getData('https://yts.am/api/v2/list_movies.json?genre=drama')
-    window.localStorage.setItem('actionList',JSON.stringify(dramaList))    
+    const dramaList = await cacheExist('drama')
     const $dramaContainer = document.getElementById('drama')
     renderMovieList(dramaList,$dramaContainer,'drama')
     
     //const animationList = await getData('https://yts.am/api/v2/list_movies.json?genre=animation')
     //renderMovieList(animationList.data.movies,$animationContainer,'animation')
-    const {data:{movies:animationList}} = await getData('https://yts.am/api/v2/list_movies.json?genre=animation')
-    window.localStorage.setItem('actionList',JSON.stringify(animationList))    
+    const animationList = await cacheExist('animation')
     const $animationContainer = document.querySelector('#animation')
     renderMovieList(animationList,$animationContainer,'animation')  
 
@@ -375,7 +383,6 @@ async function load() {
             } 
         }
         = await queryGetFriend.json()
-        debugger
         if (friendName===undefined || friendImage===undefined){
             throw new Error('No se puede desplegar la lista de amigos')
         }
