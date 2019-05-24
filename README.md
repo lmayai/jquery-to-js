@@ -413,8 +413,24 @@ Cuando lance este error, el método que hizo el llamado ahora pasará al catch.
 https://randomuser.me/api para obtener amigos de una lista. Tambien tienen imagenes
 2. Poner movies en el lado de las playlists
 
+## Local Storage
+-localStorage: Permite guardar datos sin tiempo de expiración
+-sessionStorage: Permite almacenar datos, pero se borrar al terminar las sesión del navegador.
+Con localStorage solo se puede guardar texto plano, no se pueden guardar objetos.
+```js
+// Se encuntra en el object window
+window.localStorage
+window.localStorage.clear()
+window.localStorage.setItem('nombre','leo')
+window.localStorage.getItem('nombre')
 
-
-
-
-
+```
+Si se guarda un objeto, este no se guarda correctamente, ya que debe guardarse como texto plano
+```js
+window.localStorage.setItem('nombre',JSON.stringfy({'peli':'batman'}) ) //
+```
+Luego al llamarlo se le hace el parse
+```js
+JSON.parse(window.localStorage.getItem('nombre'))
+```
+Para llamar al local storage es lo mismo poner window o no delante de este, ya que el implicitamente se refiere al window
